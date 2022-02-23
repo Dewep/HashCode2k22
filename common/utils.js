@@ -34,7 +34,7 @@ process.stdin.on('data', chunk => {
   }
 })
 
-exports.default = {
+module.exports = {
   write,
   log,
   getLine
