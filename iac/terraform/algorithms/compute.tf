@@ -1,6 +1,8 @@
 resource "helm_release" "hashcode_worker" {
   for_each = { for algorithms in local.algorithms : algorithms.id => algorithms }
 
+  timeout = 600
+
   name   = "hashcode-worker-${each.value.id}"
   chart  = "../../k8s/charts/hashcode-worker"
   values = [
