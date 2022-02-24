@@ -9,7 +9,7 @@ resource "helm_release" "hashcode_worker" {
 
   set {
     name = "command"
-    value = split(" ", each.value.command)
+    value = "${split(" ", each.value.command)}"
   }
 
   set {
