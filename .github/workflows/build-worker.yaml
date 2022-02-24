@@ -1,0 +1,18 @@
+name: Build
+on:
+  push:
+jobs:
+  build:
+    runs-on: ['self-hosted', 'X64']
+    name: build
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build and push
+      run: |
+        docker build . -t registry.hashcode-2k22.argjolan.dev/hashcode-worker:latest
+        docker tag registry.hashcode-2k22.argjolan.dev/hashcode-worker:latest registry.hashcode-2k22.argjolan.dev/hashcode-worker:${{ github.sha }}
+        docker push registry.hashcode-2k22.argjolan.dev/hashcode-worker:latest
+        docker push registry.hashcode-2k22.argjolan.dev/hashcode-worker:${{ github.sha }}

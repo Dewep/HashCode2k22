@@ -6,15 +6,15 @@
   "algorithms": [
     {
       "id": 1,
-      "path": "practice/run.js",
-      "cpu": 0,
+      "command": "node practice/hold.js",
+      "cpu": 1,
       "version": "latest"
     },
     {
       "id": 2,
-      "path": "practice/run.js",
+      "command": "node practice/hold.js",
       "cpu": 0,
-      "version": "a9cdc1d"
+      "version": "a2378492d4e41af0a6bd05d22ac6e38d4d528020"
     }
   ]
 }

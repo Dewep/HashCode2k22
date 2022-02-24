@@ -27,3 +27,8 @@ jobs:
       with:
         path: iac/terraform/services
         auto_approve: true
+    - name: Apply algorithms
+      uses: dflook/terraform-apply@v1
+      with:
+        path: iac/terraform/algorithms
+        auto_approve: true

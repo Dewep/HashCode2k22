@@ -1,0 +1,5 @@
+image:
+  registry: registry.hashcode-2k22.argjolan.dev
+  name: hashcode-worker
+  tag: latest
+command: "echo please define a command in config file"
