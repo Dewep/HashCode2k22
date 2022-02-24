@@ -19,7 +19,8 @@ spec:
         command: [ "{{ .Values.command }}" ]
         imagePullPolicy: Always
         env:
-          ALGORITHM_ID: "{{ .Values.id }}"
+        - name: ALGORITHM_ID
+          value: "{{ .Values.id }}"
         resources:
           requests:
             cpu: 1
