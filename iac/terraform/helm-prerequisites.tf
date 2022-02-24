@@ -86,11 +86,11 @@ resource "helm_release" "docker_registry" {
 
   set {
     name  = "ingress.hosts[0]"
-    value = "registry.${var.project_name}.argjolan.dev"
+    value = "registry.hashcode-2k22.argjolan.dev"
   }
   set {
     name  = "ingress.tls[0].hosts[0]"
-    value = "registry.${var.project_name}.argjolan.dev"
+    value = "registry.hashcode-2k22.argjolan.dev"
   }
   set {
     name  = "secrets.htpasswd"
