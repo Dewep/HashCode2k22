@@ -25,6 +25,7 @@ spec:
             port:
               number: 80
       - path: {{ .Values.wsPath }}
+        pathType: Prefix
         backend:
           service:
             name: {{ .Release.Name }}
