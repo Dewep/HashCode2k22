@@ -20,4 +20,4 @@ jobs:
         TF_VAR_scw_private_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         TF_VAR_scw_project_id: 04c90b28-9bd5-4a90-b18c-6b8ec5cb5f3a
       with:
-        path: terraform
+        path: iac/terraform
