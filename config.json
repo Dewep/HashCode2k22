@@ -6,13 +6,13 @@
   "algorithms": [
     {
       "id": 1,
-      "path": "practice/run.js",
+      "command": "node mysupersolver.js",
       "cpu": 0,
       "version": "latest"
     },
     {
       "id": 2,
-      "path": "practice/run.js",
+      "command": "node mysupersolver.js",
       "cpu": 0,
       "version": "a9cdc1d"
     }
