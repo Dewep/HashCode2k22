@@ -1,0 +1,4 @@
+apiVersion: v2
+description: Cluster Issuer
+name: cluster-issuer
+version: 1.0.0
