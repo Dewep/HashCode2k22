@@ -36,3 +36,8 @@ jobs:
       uses: dflook/terraform-plan@v1
       with:
         path: iac/terraform/services
+    - name: Plan algorithms
+      if: steps.check_files.outputs.files_exists == 'true'
+      uses: dflook/terraform-plan@v1
+      with:
+        path: iac/terraform/algorithms
