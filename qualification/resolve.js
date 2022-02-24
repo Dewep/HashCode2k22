@@ -30,7 +30,11 @@ async function main () {
       name,
       days: +days,
       score: +score,
+      scoreRatioPerDay: +score / +days,
       bestBeforeDay: +bestBeforeDay,
+      bestStartMaxDay: +bestBeforeDay - +days,
+      maxDayToStart: +bestBeforeDay + +score - +days,
+      // maxDayToStart: +bestBeforeDay - +days,
       roles: [],
 
       done: false
@@ -47,7 +51,7 @@ async function main () {
   log({ parsing: 'done' })
   // tri pour opti ?
   // projects.sort((a, b) => a.bestBeforeDay - b.bestBeforeDay)
-  projects.sort((a, b) => a.score - b.score)
+  // projects.sort((a, b) => a.score - b.score)
   // projects.sort((a, b) => a.roles.length - b.roles.length)
 
   // contributors.sort((a, b) => a.skills.length - b.skills.length)
@@ -66,17 +70,42 @@ async function main () {
   while (true) {
     let projectHasBeenDone = false
 
-    for (const project of projects) {
-      if (project.done) {
-        continue
-      }
+    const newProjets = projects
+      .filter(p => !p.done)
+      // .filter(p => p.maxDayToStart >= day)
 
+    // newProjets.sort((a, b) => a.bestStartMaxDay - b.bestStartMaxDay)
+    // newProjets.sort((a, b) => a.bestBeforeDay - b.bestBeforeDay)
+    // newProjets.sort((a, b) => a.score - b.score)
+    newProjets.sort((a, b) => a.scoreRatioPerDay - b.scoreRatioPerDay)
+    // newProjets.sort((a, b) => a.maxDayToStart - b.maxDayToStart)
+    // newProjets.sort((a, b) => {
+    //   if (a.bestStartMaxDay === b.bestStartMaxDay) {
+    //     return a.score - b.score
+    //   }
+    //   return a.maxDayToStart - b.maxDayToStart
+    // })
+    // newProjets.sort((a, b) => (a.score - (a.maxDayToStart - day)) - (b.score - (b.maxDayToStart - day)))
+    // newProjets.sort((a, b) => a.roles.length - b.roles.length)
 
+    for (const project of newProjets) {
       // Constitution de l'equipe =====================
       const freeContributors = contributors
         .filter(c => c.freeAtDay >= day)
       const usedContributors = []
       for (const role of project.roles) {
+        freeContributors.sort((a, b) => {
+          // return a.skills.length - b.skills.length
+          const aSkill = a.skills.find(s => s.skill === role.skill)
+          const bSkill = b.skills.find(s => s.skill === role.skill)
+          if (aSkill && bSkill) {
+            return bSkill.level - aSkill.level
+          } else if (aSkill) {
+            return -1
+          } else if (bSkill) {
+            return 1
+          }
+        })
         const contributorIndex = freeContributors.findIndex(c => isHired(c, role, usedContributors))
         if (contributorIndex === -1) {
           break
@@ -125,6 +154,9 @@ async function main () {
     if (day % 100 === 0) {
       log({ day })
     }
+    if (day > 1000) {
+      break
+    }
   }
 
   write(`${result.length}\n`)
@@ -152,4 +184,13 @@ function hasSkill(contributor, role) {
 function canBeMentored(contributor, role, team) {
   const mentor = team.some(friend => hasSkill(friend, role))
   return mentor && contributor.skills.some(sk => sk.skill === role.skill && sk.level === (role.level - 1))
+}
+
+function rankContributor(contributor, project) {
+  return contributor.skills.reduce((acc, skill) => {
+    if (skill.skill === project.skill && skill.level >= project.level) {
+      return acc + 1
+    }
+    return acc
+  }, 0)
 }
