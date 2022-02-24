@@ -21,7 +21,9 @@ jobs:
       uses: dflook/terraform-apply@v1
       with:
         path: iac/terraform/platform
+        auto_approve: true
     - name: Apply services
       uses: dflook/terraform-apply@v1
       with:
         path: iac/terraform/services
+        auto_approve: true
