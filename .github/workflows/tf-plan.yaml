@@ -1,7 +1,7 @@
 name: Terraform plan
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 jobs:
   plan:
     runs-on: ['self-hosted', 'X64']

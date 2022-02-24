@@ -1,7 +1,7 @@
 name: Terraform apply
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 jobs:
   apply:
     runs-on: ['self-hosted', 'X64']
