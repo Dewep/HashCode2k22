@@ -24,7 +24,7 @@
       "id": 3,
       "command": "./qualification/bobjolan/b.sh",
       "path": "qualification/bobjolan/resolve.js",
-      "cpu": 100,
+      "cpu": 40,
       "version": "latest",
       "input": "./qualification/b.txt"
     },
@@ -32,7 +32,7 @@
       "id": 4,
       "command": "./qualification/bobjolan/c.sh",
       "path": "qualification/bobjolan/resolve.js",
-      "cpu": 100,
+      "cpu": 40,
       "version": "latest",
       "input": "./qualification/b.txt"
     },
@@ -40,7 +40,7 @@
       "id": 5,
       "command": "./qualification/bobjolan/d.sh",
       "path": "qualification/bobjolan/resolve.js",
-      "cpu": 100,
+      "cpu": 40,
       "version": "latest",
       "input": "./qualification/b.txt"
     },
@@ -48,7 +48,7 @@
       "id": 6,
       "command": "./qualification/bobjolan/e.sh",
       "path": "qualification/bobjolan/resolve.js",
-      "cpu": 100,
+      "cpu": 40,
       "version": "latest",
       "input": "./qualification/b.txt"
     },
@@ -56,7 +56,7 @@
       "id": 7,
       "command": "./qualification/bobjolan/f.sh",
       "path": "qualification/bobjolan/resolve.js",
-      "cpu": 100,
+      "cpu": 40,
       "version": "latest",
       "input": "./qualification/b.txt"
     }
