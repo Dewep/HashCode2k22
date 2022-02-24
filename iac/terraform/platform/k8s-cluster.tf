@@ -94,7 +94,7 @@ resource "scaleway_k8s_pool" "dev1_xl" { # 4 x 125 Cores = 500
 
 resource "local_file" "kubeconfig" {
   content     = "${scaleway_k8s_cluster.hashcode.kubeconfig[0].config_file}" #${join(",", keys(scaleway_k8s_cluster.hashcode.kubeconfig[0]))}"
-  filename    = "config_hashcode"
+  filename    = "../config_hashcode"
 }
 
 resource "time_sleep" "wait_for_kubeconfig" {
