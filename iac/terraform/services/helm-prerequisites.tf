@@ -61,10 +61,10 @@ resource "helm_release" "docker_registry" {
     name  = "ingress.tls[0].hosts[0]"
     value = "registry.hashcode-2k22.argjolan.dev"
   }
-  set {
-    name  = "secrets.htpasswd"
-    value = "${local.registry_username}:${htpasswd_password.registry_password.bcrypt}"
-  }
+  # set {
+  #   name  = "secrets.htpasswd"
+  #   value = "${local.registry_username}:${htpasswd_password.registry_password.bcrypt}"
+  # }
 }
 
 resource "kubernetes_secret" "registry_credentials" {
