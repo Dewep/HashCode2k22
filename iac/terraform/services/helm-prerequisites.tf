@@ -97,7 +97,7 @@ resource "random_password" "db_password" {
 resource "scaleway_rdb_user" "hashcode" {
   instance_id = data.scaleway_rdb_instance.hashcode.id
   name        = "hashcode"
-  password    = random_password.db_password
+  password    = random_password.db_password.result
   is_admin    = false
 }
 
@@ -125,7 +125,7 @@ resource "helm_release" "hashcode_api" {
   }
   set {
     name  = "env.APPCONFIG_SERVICES_DATABASE_PASSWORD"
-    value = random_password.db_password
+    value = random_password.db_password.result
   }
   set {
     name  = "env.APPCONFIG_SERVICES_DATABASE_PORT"
