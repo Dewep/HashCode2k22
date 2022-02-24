@@ -86,10 +86,53 @@ resource "kubernetes_secret" "registry_credentials" {
   type = "kubernetes.io/dockerconfigjson"
 }
 
+data "scaleway_rdb_instance" "hashcode" {
+  name           = "hashcode"
+}
+
+resource "random_password" "db_password" {
+  length = 16
+}
+
+resource "scaleway_rdb_user" "hashcode" {
+  instance_id = data.scaleway_rdb_instance.hashcode.id
+  name        = "hashcode"
+  password    = random_password.db_password
+  is_admin    = false
+}
+
+resource "scaleway_rdb_privilege" "hashcode" {
+  instance_id   = data.scaleway_rdb_instance.hashcode.id
+  user_name     = "hashcode"
+  database_name = "hashcode"
+  permission    = "all"
+}
+
 resource "helm_release" "hashcode_api" {
   name   = "hashcode-api"
   chart  = "../../k8s/charts/hashcode-api"
   values = [
     "${file("../../k8s/charts/hashcode-api/values.yaml")}",
   ]
+
+  set {
+    name  = "env.APPCONFIG_SERVICES_DATABASE_HOST"
+    value = data.scaleway_rdb_instance.hashcode.endpoint_ip
+  }
+  set {
+    name  = "env.APPCONFIG_SERVICES_DATABASE_USER"
+    value = "hashcode"
+  }
+  set {
+    name  = "env.APPCONFIG_SERVICES_DATABASE_PASSWORD"
+    value = random_password.db_password
+  }
+  set {
+    name  = "env.APPCONFIG_SERVICES_DATABASE_PORT"
+    value = data.scaleway_rdb_instance.hashcode.endpoint_port
+  }
+  set {
+    name  = "env.APPCONFIG_SERVICES_DATABASE_DATABASE"
+    value = "hashcode"
+  }
 }
