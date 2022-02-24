@@ -17,17 +17,23 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Diff
+      id: diff
+      uses: tj-actions/changed-files@v16
     - name: Apply platform
+      if: contains(needs.diff.outputs.diff, 'iac/terraform/platform')
       uses: dflook/terraform-apply@v1
       with:
         path: iac/terraform/platform
         auto_approve: true
     - name: Apply services
+      if: contains(needs.diff.outputs.diff, 'iac/terraform/services')
       uses: dflook/terraform-apply@v1
       with:
         path: iac/terraform/services
         auto_approve: true
     - name: Apply algorithms
+      if: contains(needs.diff.outputs.diff, 'iac/terraform/algorithms')
       uses: dflook/terraform-apply@v1
       with:
         path: iac/terraform/algorithms
