@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}"
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: "{{ .Release.Name }}-selector"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Release.Name }}-selector"
+        version: "current"
+      annotations:
+        release-time: {{ now }}
+    spec:
+      containers:
+      - name: "{{ .Release.Name }}"
+        image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.servicePort }}
+          initialDelaySeconds: {{ .Values.livenessProbe.delay }}
+          periodSeconds: {{ .Values.livenessProbe.period }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.servicePort }}
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        resources:
+          requests:
+            cpu: "{{ .Values.resources.requests.cpu }}"
+            memory: "{{ .Values.resources.requests.memory }}"
+          limits:
+            cpu: "{{ .Values.resources.limits.cpu }}"
+            memory: "{{ .Values.resources.limits.memory }}"
+        env:
+          - name: APPCONFIG_SERVICES_SERVER_PORT
+            value: "{{ .Values.servicePort }}"
+{{- if .Values.env }}
+          {{- range $key, $value := .Values.env }}
+          - name: {{ $key }}
+            value: "{{ $value }}"
+          {{- end }}
+{{- end }}
+{{- if .Values.imagePullSecretsName }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecretsName }}
+{{- end }}

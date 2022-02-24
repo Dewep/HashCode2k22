@@ -1,0 +1,28 @@
+name: hashcode-dashboard
+
+domain: hashcode-2k22.argjolan.dev
+subdomain: dashboard
+domainPath: /
+
+image:
+  registry: registry.hashcode-2k22.argjolan.dev
+  name: hashcode-dashboard
+  tag: latest
+
+imagePullSecretsName: hashcode-registry-credentials
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 64Mi
+
+servicePort: 80
+serviceLabels: []
+
+ingressAnnotations: []
+livenessProbe:
+  delay: 3
+  interval: 3

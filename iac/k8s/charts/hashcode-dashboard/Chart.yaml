@@ -1,0 +1,4 @@
+apiVersion: v2
+description: Hashcode dashboard
+name: hashcode-dashboard
+version: 1.0.0

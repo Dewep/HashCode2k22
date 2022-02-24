@@ -1,0 +1,7 @@
+Installed {{ .Release.Name }}!
+
+{{- if .Values.subdomain }}
+Go to https://{{ .Values.subdomain }}.{{ .Values.domain }}{{ .Values.domainPath }} to see it up!
+{{- else }}
+Go to https://{{ .Values.domain }}{{ .Values.domainPath }} to see it up!
+{{- end }}

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "{{ .Release.Name }}-ingress"
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+{{- if .Values.ingressAnnotations }}
+{{ toYaml .Values.ingressAnnotations | indent 4 }}
+{{- end }}
+spec:
+  tls:
+  - hosts:
+    - "{{ .Values.subdomain }}.{{ .Values.domain }}"
+    secretName: "{{ .Values.subdomain }}-{{ .Values.domain }}-tls"
+  rules:
+  - host: "{{ .Values.subdomain }}.{{ .Values.domain }}"
+    http:
+      paths:
+      - path: {{ .Values.domainPath }}
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}
+            port:
+              number: 80
