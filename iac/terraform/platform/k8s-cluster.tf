@@ -4,16 +4,16 @@ resource "scaleway_k8s_cluster" "hashcode" { # Total 4530 CPUs with current quot
   cni     = "cilium"
 }
 
-# resource "scaleway_k8s_pool" "gp1_xs" { # 4 x 200 Cores = 800
-#   cluster_id  = scaleway_k8s_cluster.hashcode.id
-#   name        = "GP1-XS"
-#   node_type   = "GP1-XS"
-#   size        = 1
-#   autoscaling = true
-#   autohealing = true
-#   min_size    = 1
-#   max_size    = 200
-# }
+resource "scaleway_k8s_pool" "gp1_xs" { # 4 x 200 Cores = 800
+  cluster_id  = scaleway_k8s_cluster.hashcode.id
+  name        = "GP1-XS"
+  node_type   = "GP1-XS"
+  size        = 1
+  autoscaling = true
+  autohealing = true
+  min_size    = 1
+  max_size    = 200
+}
 
 # resource "scaleway_k8s_pool" "gp1_s" { # 8 x 100 Cores = 800
 #   cluster_id  = scaleway_k8s_cluster.hashcode.id

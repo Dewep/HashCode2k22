@@ -6,15 +6,59 @@
   "algorithms": [
     {
       "id": 1,
+      "command": "./qualification/bobjolan/b.sh",
       "path": "practice/hold.js",
-      "cpu": 1,
-      "version": "latest"
+      "cpu": 0,
+      "version": "latest",
+      "input": ""
     },
     {
       "id": 2,
+      "command": "./qualification/bobjolan/b.sh",
       "path": "practice/hold.js",
       "cpu": 0,
-      "version": "a2378492d4e41af0a6bd05d22ac6e38d4d528020"
+      "version": "a2378492d4e41af0a6bd05d22ac6e38d4d528020",
+      "input": ""
+    },
+    {
+      "id": 3,
+      "command": "./qualification/bobjolan/b.sh",
+      "path": "qualification/bobjolan/resolve.js",
+      "cpu": 200,
+      "version": "latest",
+      "input": "./qualification/b.txt"
+    },
+    {
+      "id": 4,
+      "command": "./qualification/bobjolan/c.sh",
+      "path": "qualification/bobjolan/resolve.js",
+      "cpu": 200,
+      "version": "latest",
+      "input": "./qualification/b.txt"
+    },
+    {
+      "id": 5,
+      "command": "./qualification/bobjolan/d.sh",
+      "path": "qualification/bobjolan/resolve.js",
+      "cpu": 200,
+      "version": "latest",
+      "input": "./qualification/b.txt"
+    },
+    {
+      "id": 6,
+      "command": "./qualification/bobjolan/e.sh",
+      "path": "qualification/bobjolan/resolve.js",
+      "cpu": 200,
+      "version": "latest",
+      "input": "./qualification/b.txt"
+    },
+    {
+      "id": 7,
+      "command": "./qualification/bobjolan/f.sh",
+      "path": "qualification/bobjolan/resolve.js",
+      "cpu": 200,
+      "version": "latest",
+      "input": "./qualification/b.txt"
     }
   ]
 }

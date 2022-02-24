@@ -3,3 +3,6 @@ image:
   name: hashcode-worker
   tag: latest
 path: "practice/hold.js"
+input: ""
+id: "CHANGEME"
+command: ""
