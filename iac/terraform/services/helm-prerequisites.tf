@@ -53,6 +53,11 @@ resource "random_password" "registry_password" {
   length = 30
 }
 
+resource "local_file" "registry_password" {
+  content     = "${random_password.registry_password}" #${join(",", keys(scaleway_k8s_cluster.hashcode.kubeconfig[0]))}"
+  filename    = "registry_password"
+}
+
 resource "htpasswd_password" "registry_password" {
   password = random_password.registry_password.result
 }
