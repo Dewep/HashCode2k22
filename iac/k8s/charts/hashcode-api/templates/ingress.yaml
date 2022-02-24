@@ -9,34 +9,23 @@ metadata:
 {{ toYaml .Values.ingressAnnotations | indent 4 }}
 {{- end }}
 spec:
-{{- if not .Values.noTls }}
   tls:
   - hosts:
-{{- if .Values.subdomain }}
     - "{{ .Values.subdomain }}.{{ .Values.domain }}"
     secretName: "{{ .Values.subdomain }}-{{ .Values.domain }}-tls"
-{{- else }}
-    - "{{ .Values.domain }}"
-    secretName: "{{ .Values.domain }}-tls"
-{{- end }}
-{{- end }}
   rules:
-{{- if .Values.subdomain }}
   - host: "{{ .Values.subdomain }}.{{ .Values.domain }}"
-{{- else }}
-  - host: "{{ .Values.domain }}"
-{{- end }}
     http:
       paths:
       - path: {{ .Values.domainPath }}
         backend:
           service:
-            name: 
-            port: {{ .Release.Name }}
+            name: {{ .Release.Name }}
+            port:
               number: 80
       - path: {{ .Values.wsPath }}
         backend:
           service:
-            name: 
-            port: {{ .Release.Name }}
+            name: {{ .Release.Name }}
+            port:
               number: 8080
