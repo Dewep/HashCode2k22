@@ -14,7 +14,7 @@
       "id": 2,
       "command": "node mysupersolver.js",
       "cpu": 0,
-      "version": "a9cdc1d"
+      "version": "a2378492d4e41af0a6bd05d22ac6e38d4d528020"
     }
   ]
 }
