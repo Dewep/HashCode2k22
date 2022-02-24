@@ -38,7 +38,13 @@ const processDay = (state) => {
       }
 
       for (const skill of contributor.skills) {
+        if (contributor.busy) {
+          break
+        }
         for (let role of project.roles) {
+          if (contributor.busy) {
+            break
+          }
           if (role.skill === skill.skill && role.level <= skill.level) {
             role.done = true
             role.contributor = contributor
