@@ -21,4 +21,5 @@ locals {
   scw_region = "nl-ams"
   scw_zone   = "nl-ams-1"
   registry_username = "hashcode"
+  algorithms = jsondecode(file("../../../config.json")).algorithms
 }

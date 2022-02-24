@@ -103,7 +103,7 @@ resource "scaleway_rdb_user" "hashcode" {
 
 resource "scaleway_rdb_privilege" "hashcode" {
   instance_id   = data.scaleway_rdb_instance.hashcode.id
-  user_name     = "hashcode"
+  user_name     = scaleway_rdb_user.hashcode.name
   database_name = "hashcode"
   permission    = "all"
 }
@@ -134,5 +134,9 @@ resource "helm_release" "hashcode_api" {
   set {
     name  = "env.APPCONFIG_SERVICES_DATABASE_DATABASE"
     value = "hashcode"
+  }
+  set {
+    name  = "env.APPCONFIG_SERVICES_ALGORITHM_ALGORITHMS"
+    value = jsonencode(local.algorithms)
   }
 }

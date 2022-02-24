@@ -1,0 +1,20 @@
+{
+  "api": {
+    "ssl": false,
+    "host": "hashcode-api"
+  },
+  "algorithms": [
+    {
+      "id": 1,
+      "path": "practice/run.js",
+      "cpu": 0,
+      "version": "latest"
+    },
+    {
+      "id": 2,
+      "path": "practice/run.js",
+      "cpu": 0,
+      "version": "a9cdc1d"
+    }
+  ]
+}
