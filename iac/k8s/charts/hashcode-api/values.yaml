@@ -1,5 +1,5 @@
 domain: hashcode-2k22.argjolan.dev
-subdomain: api
+subdomain: dashboard
 domainPath: /api(/|$)(.*)
 wsPath: /ws(/|$)(.*)
 
