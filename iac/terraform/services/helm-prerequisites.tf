@@ -14,23 +14,6 @@ resource "time_sleep" "wait_for_cluster_issuer_namespace" {
   create_duration = "20s"
 }
 
-resource "kubernetes_namespace" "hashcode" {
-  depends_on = [
-    kubernetes_namespace.cluster_issuer
-  ]
-  metadata {
-    name = "hashcode"
-  }
-}
-
-resource "time_sleep" "wait_for_hashcode_namespace" {
-  depends_on = [
-    kubernetes_namespace.hashcode,
-  ]
-
-  create_duration = "20s"
-}
-
 resource "helm_release" "cert_manager" {
   depends_on = [
   ]
@@ -85,12 +68,9 @@ resource "helm_release" "docker_registry" {
 }
 
 resource "kubernetes_secret" "registry_credentials" {
-  depends_on = [
-    time_sleep.wait_for_hashcode_namespace,
-  ]
   metadata {
     name = "hashcode-registry-credentials"
-    namespace = "hashcode"
+    namespace = "default"
   }
 
   data = {
@@ -104,4 +84,12 @@ resource "kubernetes_secret" "registry_credentials" {
   }
 
   type = "kubernetes.io/dockerconfigjson"
+}
+
+resource "helm_release" "hashcode_api" {
+  name   = "hashcode-api"
+  chart  = "../../k8s/charts/hashcode-api"
+  values = [
+    "${file("../../k8s/charts/hashcode-api/values.yaml")}",
+  ]
 }

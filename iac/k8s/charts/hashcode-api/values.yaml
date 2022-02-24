@@ -1,0 +1,34 @@
+domain: hashcode.argjolan.dev
+subdomain: api
+domainPath: /api(/|$)(.*)
+wsPath: /ws(/|$)(.*)
+
+ingressAnnotations:
+  nginx.ingress.kubernetes.io/rewrite-target: /$2
+
+image:
+  registry: registry.hashcode-2k22.argjolan.dev
+  name: hashcode-api
+  tag: latest
+
+imagePullSecretsName: hashcode-registry-credentials
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 128Mi
+  limits:
+    cpu: 1
+    memory: 1Gi
+
+servicePort: 80
+serviceLabels: []
+wsPort: 8080
+
+livenessProbe:
+  delay: 3
+  interval: 3
+
+postgresql:
+  enabled: false
+env: {}
