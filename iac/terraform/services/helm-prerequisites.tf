@@ -54,7 +54,7 @@ resource "random_password" "registry_password" {
 }
 
 resource "local_file" "registry_password" {
-  content     = "${random_password.registry_password}" #${join(",", keys(scaleway_k8s_cluster.hashcode.kubeconfig[0]))}"
+  content     = "${random_password.registry_password.result}"
   filename    = "registry_password"
 }
 
