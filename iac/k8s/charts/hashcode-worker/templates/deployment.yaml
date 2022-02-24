@@ -19,6 +19,8 @@ spec:
         command: ["node"]
         args: [ "{{ .Values.path }}", "<", "{{ .Values.input }}" ]
         imagePullPolicy: Always
+        env:
+          ALGORITHM_ID: "{{ .Values.id }}"
         resources:
           requests:
             cpu: 1
