@@ -14,5 +14,5 @@ jobs:
       run: |
         docker build . -t registry.hashcode-2k22.argjolan.dev/hashcode-worker:latest
         docker tag registry.hashcode-2k22.argjolan.dev/hashcode-worker:latest registry.hashcode-2k22.argjolan.dev/hashcode-worker:${{ github.sha }}
-        docekr push registry.hashcode-2k22.argjolan.dev/hashcode-worker:latest
-        docekr push registry.hashcode-2k22.argjolan.dev/hashcode-worker:${{ github.sha }}
+        docker push registry.hashcode-2k22.argjolan.dev/hashcode-worker:latest
+        docker push registry.hashcode-2k22.argjolan.dev/hashcode-worker:${{ github.sha }}
