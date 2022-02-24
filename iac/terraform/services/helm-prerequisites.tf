@@ -68,9 +68,6 @@ resource "helm_release" "docker_registry" {
 }
 
 resource "kubernetes_secret" "registry_credentials" {
-  depends_on = [
-    time_sleep.wait_for_hashcode_namespace,
-  ]
   metadata {
     name = "hashcode-registry-credentials"
     namespace = "default"
