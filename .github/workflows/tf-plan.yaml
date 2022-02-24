@@ -21,6 +21,10 @@ jobs:
       uses: dflook/terraform-plan@v1
       with:
         path: iac/terraform/platform
+    - name: Get kubeconfig
+      uses: dflook/terraform-apply@v1
+      with:
+        path: iac/terraform/kubeconfig
     - name: Check kubeconfig exists
       id: check_files
       uses: andstor/file-existence-action@v1
