@@ -1,0 +1,4 @@
+apiVersion: v2
+description: Hashcode Worker
+name: hashcode-worker
+version: 1.0.0
