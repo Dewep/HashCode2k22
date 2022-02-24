@@ -7,14 +7,23 @@
     {
       "id": 1,
       "path": "practice/hold.js",
-      "cpu": 1,
-      "version": "latest"
+      "cpu": 0,
+      "version": "latest",
+      "input": ""
     },
     {
       "id": 2,
       "path": "practice/hold.js",
       "cpu": 0,
-      "version": "a2378492d4e41af0a6bd05d22ac6e38d4d528020"
+      "version": "a2378492d4e41af0a6bd05d22ac6e38d4d528020",
+      "input": ""
+    },
+    {
+      "id": 3,
+      "path": "qualification/bobjolan/resolve.js",
+      "cpu": 100,
+      "version": "latest",
+      "input": "./qualification/b.txt"
     }
   ]
 }
