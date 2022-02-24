@@ -17,7 +17,7 @@ spec:
       - name: "{{ .Release.Name }}"
         image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
         command: ["node"]
-        args: [ "{{ .Values.path }}" ]
+        args: [ "{{ .Values.path }}", "<", "{{ .Values.input }}" ]
         imagePullPolicy: Always
         resources:
           requests:
