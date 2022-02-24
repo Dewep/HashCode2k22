@@ -1,0 +1,14 @@
+domain: argjolan.com
+
+subdomain: null
+
+image:
+  tag: master
+
+resources:
+  requests:
+    cpu: 500m
+    memory: 128Mi
+  limits:
+    cpu: 1
+    memory: 1Gi

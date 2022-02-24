@@ -1,0 +1,4 @@
+apiVersion: v2
+description: Hashcode API
+name: hashcode-api
+version: 1.0.0

@@ -1,0 +1,16 @@
+domain: local.argjolan.ovh
+imagePullSecretsName: null
+
+image:
+  registry: "registry.local.argjolan.ovh:5000"
+  tag: latest
+
+servicePort: 3000
+livenessProbeDelay: 10
+noTls: true
+
+postgresql:
+  enabled: true
+  postgresqlPassword: 'postgres'
+  service:
+    type: LoadBalancer
