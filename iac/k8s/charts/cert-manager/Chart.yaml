@@ -1,0 +1,4 @@
+apiVersion: v2
+description: Cert manager
+name: cert-manager
+version: 1.0.0
