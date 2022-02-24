@@ -44,39 +44,114 @@ async function main () {
     projects.push(project)
   }
 
+  log({ parsing: 'done' })
+  // tri pour opti ?
   projects.sort((a, b) => a.bestBeforeDay - b.bestBeforeDay)
+  projects.sort((a, b) => a.score - b.score)
+  // projects.sort((a, b) => a.roles.length - b.roles.length)
+
+  contributors.sort((a, b) => a.skills.length - b.skills.length)
+  
+  // max skill level first
+  contributors.sort((a, b) => {
+    const aSkill = a.skills.sort((a, b) => b.level - a.level)[0]
+    const bSkill = b.skills.sort((a, b) => b.level - a.level)[0]
+
+    return aSkill.level - bSkill.level
+  })
 
   const result = []
+  let dayForTheLastProject = 0
   let day = 0
   while (true) {
+    let projectHasBeenDone = false
+
     for (const project of projects) {
       if (project.done) {
         continue
       }
 
+
+      // Constitution de l'equipe =====================
       const freeContributors = contributors
         .filter(c => c.freeAtDay >= day)
-        .map(c => ({
-          ...c,
-          used: false
-        }))
-      for (const skill of project.roles) {
-        const freeContributorsBySkill = freeContributors.filter(c => !c.used && c.skills.find(s => s.skill === skill.skill && s.level >= skill.level))
-        if (freeContributorsBySkill.length > 0) {
-          const contributor = freeContributorsBySkill[0]
-          contributor.freeAtDay += project.days
-          contributor.skills.push(skill)
-          project.done = true
-          result.push(`${contributor.name} ${project.name}`)
-          break
+      const usedContributors = []
+      for (const role of project.roles) {
+        for (let contributorIndex = 0; contributorIndex < freeContributors.length; contributorIndex++) {
+          const contributor = freeContributors[contributorIndex]
+          if (isHired(contributor, role, usedContributors)) {
+            contributor.role = role
+            usedContributors.push(contributor)
+          }
+
+          if (usedContributors.length === project.roles.length) {
+            break
+          }
+          freeContributors.splice(contributorIndex, 1)
         }
       }
+      // ========================================
+
+      if (usedContributors.length !== project.roles.length) {
+        continue
+      }
+
+      for (let contributorIndex = 0; contributorIndex < usedContributors.length; contributorIndex++) {
+        const contributor = usedContributors[contributorIndex]
+
+        contributor.freeAtDay += project.days
+        usedSkill = contributor.skills.find(s => s.skill === project.roles[contributorIndex].skill)
+        if (usedSkill && usedSkill.level <= project.roles[contributorIndex].level) {
+          usedSkill.level += 1
+        }
+
+        contributor.role = undefined
+      }
+
+      if (dayForTheLastProject < day + project.days) {
+        dayForTheLastProject = day + project.days
+      }
+      project.done = true
+      projectHasBeenDone = true
+      result.push({
+        project: project.name,
+        contributors: usedContributors.map(c => c.name)
+      })
+    }
+
+    if (!projectHasBeenDone && dayForTheLastProject <= day) {
+      break
     }
 
     day += 1
+    if (day % 100 === 0) {
+      log({ day })
+    }
   }
 
-  log({ projects, contributors })
+  write(`${result.length}\n`)
+  for (const project of result) {
+    write(project.project + '\n' + project.contributors.join(' ') + '\n')
+  }
+
+  log({ projects: projects.length, contributors: contributors.length, result: result.length })
+  // log({ projects, contributors, result })
+  // log({ result })
 }
 
 main().then(() => process.exit(0)).catch(err => console.error(err))
+
+
+///////////////////////////////
+function isHired(contributor, role, team) {
+  return hasSkill(contributor, role) || canBeMentored(contributor, role, team)
+}
+
+function hasSkill(contributor, role) {
+return contributor.skills.some(sk => sk.skill === role.skill && sk.level <= role.level)
+}
+
+function canBeMentored(contributor, role, team) {
+const mentor = team.some(friend => hasSkill(friend, role))
+return mentor && contributor.skills.some(sk => sk.skill === role.skill && sk.level === (role.level - 1))
+}

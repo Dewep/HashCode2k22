@@ -5,7 +5,7 @@ async function main () {
   const resolve = process.argv[3] || 'resolve.js'
 
   await cmd(['node', resolve, '<', `${letter}.txt`, '>', `${letter}.out.txt`])
-  await cmd(['node', 'score.js', `${letter}.out.txt`, '<', `${letter}.txt`])
+  // await cmd(['node', 'score.js', `${letter}.out.txt`, '<', `${letter}.txt`])
 }
 
 async function cmd (command) {
