@@ -5,6 +5,7 @@ resource "scaleway_rdb_instance" "hashcode" {
   is_ha_cluster  = false
   disable_backup = false
   volume_type    = "bssd"
+  volume_size_in_gb = 105
 }
 
 resource "scaleway_rdb_database" "hashcode" {
