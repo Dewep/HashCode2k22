@@ -1,5 +1,5 @@
 resource "helm_release" "hashcode_worker" {
-  for_each = tolist(local.algorithms)
+  for_each = { for algorithms in local.algorithms : algorithms.name => algorithms }
 
   name   = "hashcode-worker-${each.value.id}"
   chart  = "../../k8s/charts/hashcode-worker"
