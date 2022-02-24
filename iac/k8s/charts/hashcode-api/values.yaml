@@ -1,4 +1,4 @@
-domain: hashcode.argjolan.dev
+domain: hashcode-2k22.argjolan.dev
 subdomain: api
 domainPath: /api(/|$)(.*)
 wsPath: /ws(/|$)(.*)
