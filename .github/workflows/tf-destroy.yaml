@@ -6,7 +6,6 @@ jobs:
   destroy:
     runs-on: ['self-hosted', 'X64']
     name: destroy
-    needs: diff
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
