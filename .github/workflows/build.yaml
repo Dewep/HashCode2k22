@@ -1,0 +1,13 @@
+name: Build
+on:
+  push:
+jobs:
+  build:
+    runs-on: ['self-hosted', 'X64']
+    name: build
+    steps:
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: "registry.hashcode-2k22.argjolan.dev:latest,registry.hashcode-2k22.argjolan.dev:$GITHUB_SHA"
