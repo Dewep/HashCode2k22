@@ -94,6 +94,11 @@ resource "random_password" "db_password" {
   length = 16
 }
 
+resource "local_file" "db_password" {
+  content     = "${random_password.db_password.result}"
+  filename    = "db_password"
+}
+
 resource "scaleway_rdb_user" "hashcode" {
   instance_id = data.scaleway_rdb_instance.hashcode.id
   name        = "hashcode"

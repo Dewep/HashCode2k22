@@ -53,3 +53,4 @@ terraform.rc
 
 config_hashcode
 registry_password
+db_password
