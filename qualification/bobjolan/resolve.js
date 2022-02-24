@@ -107,7 +107,7 @@ const getSolution = ({ projects }) => {
 
   let solution = `${count}`
   for (project of done) {
-    solution = `${solution}\n${project.name}\n${project.roles.map(role => role.contributor.name).join('\n')}`
+    solution = `${solution}\n${project.name}\n${project.roles.map(role => role.contributor.name).join(' ')}`
   }
   return solution
 }
