@@ -8,8 +8,8 @@ resource "helm_release" "hashcode_worker" {
   ]
 
   set {
-    name = "command"
-    value = "${split(" ", each.value.command)}"
+    name = "path"
+    value = each.value.path
   }
 
   set {

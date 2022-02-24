@@ -6,13 +6,13 @@
   "algorithms": [
     {
       "id": 1,
-      "command": "node practice/hold.js",
+      "path": "practice/hold.js",
       "cpu": 1,
       "version": "latest"
     },
     {
       "id": 2,
-      "command": "node practice/hold.js",
+      "path": "practice/hold.js",
       "cpu": 0,
       "version": "a2378492d4e41af0a6bd05d22ac6e38d4d528020"
     }
