@@ -137,6 +137,6 @@ resource "helm_release" "hashcode_api" {
   }
   set {
     name  = "env.APPCONFIG_SERVICES_ALGORITHM_ALGORITHMS"
-    value = jsonencode(local.algorithms)
+    value = "${jsonencode(local.algorithms)}"
   }
 }
