@@ -1,0 +1,22 @@
+{
+  "name": "hashcode-worker",
+  "version": "1.0.0",
+  "description": "HashCode2k22",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dewep/HashCode2k22.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dewep/HashCode2k22/issues"
+  },
+  "homepage": "https://github.com/Dewep/HashCode2k22#readme",
+  "dependencies": {
+    "axios": "^0.26.0"
+  }
+}
