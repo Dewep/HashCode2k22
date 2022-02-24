@@ -145,3 +145,11 @@ resource "helm_release" "hashcode_api" {
     value = "${join("-", local.algorithms.*.id)}"
   }
 }
+
+resource "helm_release" "hashcode_dashboard" {
+  name   = "hashcode-dashboard"
+  chart  = "../../k8s/charts/hashcode-dashboard"
+  values = [
+    "${file("../../k8s/charts/hashcode-dashboard/values.yaml")}",
+  ]
+}
