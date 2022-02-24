@@ -4,7 +4,7 @@ terraform {
   backend "s3" {
     endpoint                    = "https://s3.nl-ams.scw.cloud"
     bucket                      = "hashcode-tf-state"
-    key                         = "state"
+    key                         = "state-services"
     region                      = "nl-ams"
     skip_credentials_validation = true
     skip_region_validation      = true
@@ -49,11 +49,11 @@ provider "htpasswd" {}
 provider "time" {}
 
 provider "kubernetes" {
-  config_path = local_file.kubeconfig.filename
+  config_path = "../config_hashcode"
 }
 provider "helm" {
   kubernetes {
-    config_path = local_file.kubeconfig.filename
+    config_path = "../config_hashcode"
   }
 }
 provider "scaleway" {
