@@ -19,6 +19,10 @@ resource "helm_release" "hashcode_worker" {
     name = "input"
     value = each.value.input
   }
+  set {
+    name = "command"
+    value = each.value.command
+  }
 
   set {
     name = "replicas"

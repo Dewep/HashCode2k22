@@ -16,8 +16,7 @@ spec:
       containers:
       - name: "{{ .Release.Name }}"
         image: "{{ .Values.image.registry }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
-        command: ["node"]
-        args: [ "{{ .Values.path }}", "<", "{{ .Values.input }}" ]
+        command: [ "{{ .Values.command }}" ]
         imagePullPolicy: Always
         env:
           ALGORITHM_ID: "{{ .Values.id }}"
