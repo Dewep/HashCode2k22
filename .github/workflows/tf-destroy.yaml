@@ -1,24 +1,11 @@
-name: Terraform apply
+name: Terraform destroy
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 jobs:
-  diff:
-    runs-on: ['self-hosted']
-    name: diff
-    outputs:
-      diff: ${{ steps.diff.outputs.all_changed_and_modified_files }}
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 2
-    - name: Diff
-      id: diff
-      uses: tj-actions/changed-files@v16
-  apply:
+  destroy:
     runs-on: ['self-hosted', 'X64']
-    name: apply
+    name: destroy
     needs: diff
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -29,26 +16,26 @@ jobs:
       TF_VAR_scw_private_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       TF_VAR_scw_project_id: 04c90b28-9bd5-4a90-b18c-6b8ec5cb5f3a
     steps:
-    - name: Apply platform
+    - name: destroy platform
       # if: contains(needs.diff.outputs.diff, 'iac/terraform/platform')
-      uses: dflook/terraform-apply@v1
+      uses: dflook/terraform-destroy@v1
       with:
         path: iac/terraform/platform
         auto_approve: true
     # - name: Get kubeconfig
-    #   uses: dflook/terraform-apply@v1
+    #   uses: dflook/terraform-destroy@v1
     #   with:
     #     path: iac/terraform/kubeconfig
     #     auto_approve: true
-    - name: Apply services
+    - name: destroy services
       # if: contains(needs.diff.outputs.diff, 'iac/terraform/services')
-      uses: dflook/terraform-apply@v1
+      uses: dflook/terraform-destroy@v1
       with:
         path: iac/terraform/services
         auto_approve: true
-    - name: Apply algorithms
+    - name: destroy algorithms
       # if: contains(needs.diff.outputs.diff, 'iac/terraform/algorithms')
-      uses: dflook/terraform-apply@v1
+      uses: dflook/terraform-destroy@v1
       with:
         path: iac/terraform/algorithms
         auto_approve: true
