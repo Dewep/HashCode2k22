@@ -1,6 +1,7 @@
 name: Build
 on:
   push:
+    branches: [ master ]
 jobs:
   build:
     runs-on: ['self-hosted', 'X64']
