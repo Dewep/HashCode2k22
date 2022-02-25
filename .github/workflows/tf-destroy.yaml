@@ -1,7 +1,7 @@
 name: Terraform destroy
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 jobs:
   destroy:
     runs-on: ['self-hosted', 'X64']
