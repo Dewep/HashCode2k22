@@ -49,20 +49,28 @@ async function main () {
   }
 
   log({ parsing: 'done' })
+
+  // log (projects.sort((a, b) => a.score - b.score)[projects.length - 1])
+  // return 
   // tri pour opti ?
   // projects.sort((a, b) => a.bestBeforeDay - b.bestBeforeDay)
-  // projects.sort((a, b) => a.score - b.score)
+  projects.map(value => ({ value, sort: Math.random() }))
+  .sort((a, b) => a.sort - b.sort)
+  .map(({ value }) => value)
   // projects.sort((a, b) => a.roles.length - b.roles.length)
+  // projects.sort((a, b) => b.score - a.score)
 
-  // contributors.sort((a, b) => a.skills.length - b.skills.length)
+  contributors.map(value => ({ value, sort: Math.random() }))
+  .sort((a, b) => a.sort - b.sort)
+  .map(({ value }) => value)
   
   // max skill level first
-  contributors.sort((a, b) => {
-    const aSkill = a.skills.sort((a, b) => b.level - a.level)[0]
-    const bSkill = b.skills.sort((a, b) => b.level - a.level)[0]
+  // contributors.sort((a, b) => {
+  //   const aSkill = a.skills.sort((a, b) => b.level - a.level)[0]
+  //   const bSkill = b.skills.sort((a, b) => b.level - a.level)[0]
 
-    return aSkill.level - bSkill.level
-  })
+  //   return bSkill.level - aSkill.level
+  // })
 
   const result = []
   let dayForTheLastProject = 0
@@ -92,6 +100,8 @@ async function main () {
       // Constitution de l'equipe =====================
       const freeContributors = contributors
         .filter(c => c.freeAtDay >= day)
+
+      freeContributors.sort((a, b) => rankContributor(b, project) - rankContributor(a, project))
       const usedContributors = []
       for (const role of project.roles) {
         freeContributors.sort((a, b) => {
@@ -154,9 +164,6 @@ async function main () {
     if (day % 100 === 0) {
       log({ day })
     }
-    if (day > 1000) {
-      break
-    }
   }
 
   write(`${result.length}\n`)
@@ -193,4 +200,20 @@ function rankContributor(contributor, project) {
     }
     return acc
   }, 0)
+}
+
+function bestMatchForProject(contributors, project) {
+  const freeContributors = contributors.filter(c => c.freeAtDay >= project.bestBeforeDay)
+  const usedContributors = []
+  for (const role of project.roles) {
+    const contributorIndex = freeContributors.findIndex(c => isHired(c, role, usedContributors))
+    if (contributorIndex === -1) {
+      break
+    }
+    let selectedContributors = freeContributors.splice(contributorIndex, 1)[0]
+    selectedContributors.role = role
+    usedContributors.push(selectedContributors)
+  }
+
+  return usedContributors
 }
