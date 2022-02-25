@@ -12,8 +12,8 @@
 | ... | ...               |... | ...    |...     | ...    |...      | ...    | ...     |
 | **#885** | **Iron 7**   | 33 | 711623 | 21783   | 86561 | 1637258 | 76321  | 2533579 |
 
-Autors :
+Authors :
  - [Aurélien Maigret](https://github.com/Dewep)
- - [Fabien Caster](https://github.com/vaga)
+ - [Fabien Casters](https://github.com/vaga)
  - [Pierre-Alain Simon](https://github.com/3ffusi0on)
  - [Thomas Molina](https://github.com/argjolan)
