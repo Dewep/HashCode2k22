@@ -16,4 +16,4 @@ Autors :
  - [Aurélien Maigret](https://github.com/Dewep)
  - [Fabien Caster](https://github.com/vaga)
  - [Pierre-Alain Simon](https://github.com/3ffusi0on)
- - [Thomas Molinat](https://github.com/argjolan)
+ - [Thomas Molina](https://github.com/argjolan)
